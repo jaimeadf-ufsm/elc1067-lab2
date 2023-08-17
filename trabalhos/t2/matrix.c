@@ -24,7 +24,7 @@ void fill_matrix(Matrix *matrix)
     int index = 0;
     int size = matrix->width * matrix->height;
 
-    char character;
+    int character;
 
     do
     {
@@ -33,9 +33,9 @@ void fill_matrix(Matrix *matrix)
 
     do
     {
-        if (!isspace(character) && index < size)
+        if (isalpha(character) && index < size)
         {
-            matrix->vector[index++] = character;
+            matrix->vector[index++] = (char)character;
         }
 
         character = getchar();
