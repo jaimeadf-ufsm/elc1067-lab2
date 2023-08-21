@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "matrix.h"
 
 Matrix create_matrix(int width, int height)
 {

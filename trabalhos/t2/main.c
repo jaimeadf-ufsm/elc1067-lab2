@@ -29,8 +29,13 @@ int main()
     {
         char *word;
 
-        printf("\n\nQual palavra voce deseja buscar? ");
+        printf("\n\nQual palavra voce deseja buscar (-1 para sair)? ");
         scanf("%ms", &word);
+
+        if (strcmp(word, "-1") == 0)
+        {
+            break;
+        }
 
         Matches matches = search_word(&matrix, word);
 

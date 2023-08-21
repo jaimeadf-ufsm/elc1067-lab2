@@ -6,19 +6,16 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-typedef struct vector2_t Vector2;
-typedef struct matrix_t Matrix;
-
-struct vector2_t
+typedef struct vector2_t
 {
     int x, y;
-};
+} Vector2;
 
-struct matrix_t
+typedef struct matrix_t
 {
     int width, height;
     char *vector;
-};
+} Matrix;
 
 Matrix create_matrix(int width, int height);
 void release_matrix(Matrix *matrix);

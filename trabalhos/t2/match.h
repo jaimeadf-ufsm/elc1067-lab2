@@ -4,46 +4,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 
+#include <string.h>
 #include "matrix.h"
 
-typedef enum order_e Order;
-typedef enum orientatation_e Orientation;
-typedef struct match_t Match;
-typedef struct matches_t Matches;
-
-enum order_e
+typedef enum order_e
 {
     ORDER_DIRECT,
     ORDER_REVERSE,
     ORDER_N
-};
+} Order;
 
-enum orientatation_e
+typedef enum orientatation_e
 {
     ORIENTATION_HORIZONTAL,
     ORIENTATION_VERTICAL,
     ORIENTATION_MAIN_DIAGONAL,
     ORIENTATION_SECONDARY_DIAGONAL,
     ORIENTATION_N
-};
+} Orientation;
 
-struct match_t
+typedef struct match_t
 {
     Order order;
     Orientation orientation;
 
     Vector2 start, end;
-};
+} Match;
 
-struct matches_t
+typedef struct matches_t
 {
     int size;
     int capacity;
 
     Match *results;
-};
+} Matches;
 
 Matches create_matches(int capacity);
 void release_matches(Matches *matches);
