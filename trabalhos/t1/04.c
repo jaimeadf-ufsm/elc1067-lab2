@@ -17,7 +17,7 @@ void leVetor(int tamanho, Usuario* vet)
     {
         printf("\nUsuario %d:\n", i + 1);
 
-        printf("Digite o sexo ('m' ou 'f'): ");
+        printf("Digite o sexo ('M' ou 'F'): ");
         scanf(" %c", &vet[i].sexo);
 
         printf("Digite a idade: ");
@@ -49,7 +49,7 @@ int calculaQtidadeMulheres(int tamanho, Usuario* vet)
 
     for (int i = 0; i < tamanho; i++)
     {
-        if (vet[i].sexo == 'f' && vet[i].qtdade >= 5)
+        if (vet[i].sexo == 'F' && vet[i].qtdade >= 5)
         {
             qtd++;
         }

@@ -28,8 +28,8 @@ void calculaPeriArea(Retangulo ret)
 
     printf("Base: %f\n", ret.base);
     printf("Altura: %f\n", ret.altura);
-    printf("Area: %f\n", ret.area);
     printf("Perimetro: %f\n\n", ret.perimetro);
+    printf("Area: %f\n", ret.area);
 }
 
 int main()
