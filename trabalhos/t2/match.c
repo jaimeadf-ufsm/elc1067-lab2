@@ -14,7 +14,7 @@ Vector2 get_forward_direction(Orientation orientation)
     case ORIENTATION_MAIN_DIAGONAL:
         return (Vector2) {1, 1};
     case ORIENTATION_SECONDARY_DIAGONAL:
-        return (Vector2) {1, -1};
+        return (Vector2) {-1, 1};
     default:
         return (Vector2) {0, 0};
     }
@@ -122,9 +122,10 @@ Matches search_word(Matrix *matrix, char *word)
     for (int k = 1; k <= matrix->width + matrix->height - 1; k++)
     {
         int x = MAX(k - matrix->height, 0);
+        int y = MAX(matrix->height - k, 0);
 
-        Vector2 main_position = { x, MAX(matrix->height - k, 0) };
-        Vector2 secondary_position = { x, MIN(k, matrix->height) - 1 };
+        Vector2 main_position = { x, y};
+        Vector2 secondary_position = { matrix->width - x - 1, y };
 
         check_for_matches(matrix, &matches, word, &main_position, ORIENTATION_MAIN_DIAGONAL);
         check_for_matches(matrix, &matches, word, &secondary_position, ORIENTATION_SECONDARY_DIAGONAL);
