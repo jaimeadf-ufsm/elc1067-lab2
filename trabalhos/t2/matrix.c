@@ -2,10 +2,18 @@
 
 Matrix create_matrix(int width, int height)
 {
+    char *vector = (char *)calloc(width * height, sizeof(char));
+
+    if (vector == NULL)
+    {
+        printf("ERRO: nao foi possivel alocar a matriz.\n");
+        exit(1);
+    }
+
     return (Matrix) {
         .width = width,
         .height = height,
-        .vector = (char *)calloc(width * height, sizeof(char))
+        .vector = vector
     };
 }
 

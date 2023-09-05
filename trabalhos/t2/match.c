@@ -22,10 +22,18 @@ Vector2 get_forward_direction(Orientation orientation)
 
 Matches create_matches(int capacity)
 {
+    Match *results = (Match *)malloc(capacity * sizeof(Match));
+
+    if (results == NULL)
+    {
+        printf("ERRO: nao foi possivel alocar o vetor de resultados.\n");
+        exit(1);
+    }
+
     return (Matches) {
         .size = 0,
         .capacity = capacity,
-        .results = (Match *)malloc(capacity * sizeof(Match))
+        .results = results
     };
 }
 
