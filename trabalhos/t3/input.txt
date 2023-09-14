@@ -1,0 +1,370 @@
+1
+AFA431
+Chevrolet
+Camaro
+3033
+100.00
+13451
+
+1
+KAS733
+Fiat
+Mobi 1.0
+3030
+59.95
+76831
+
+1
+FAH381
+Renaul
+Kwid
+3017
+63.00
+13390
+
+1
+AIO158
+Nissan
+Kicks
+3019
+139.00
+317830
+
+1
+FUH513
+Jeep
+Compass 1.3 Turbo
+3030
+305.31
+85313
+
+1
+KAS733
+Mitsubishi
+L300 Triton
+3019
+353.00
+41338
+
+1
+EKB739
+Toyota
+Camry SE
+3033
+335.50
+13500
+
+1
+HJL874
+Ford
+F-150 XLT
+3031
+375.35
+31500
+
+1
+RPM393
+Honda
+Civic LX
+3030
+190.75
+15400
+
+1
+LQN631
+Chevrolet
+Equinox LT
+3033
+345.80
+8500
+
+1
+VXG189
+Nissan
+Altima SV
+3031
+310.40
+17300
+
+1
+WFD468
+Hyundai
+Tucson SEL
+3030
+199.95
+30500
+
+1
+GTR506
+Jeep
+Wrangler Sport
+3033
+315.60
+8900
+
+1
+QPL437
+Kia
+Sorento LX
+3031
+355.30
+13500
+
+1
+BHN833
+Mazda
+CX-5 Touring
+3030
+315.75
+18500
+
+1
+DXY973
+Volkswagen
+Passat SE
+3033
+335.30
+9500
+
+1
+KRW365
+Subaru
+Outback Premium
+3031
+365.45
+13400
+
+1
+TSF548
+GMC
+Terrain SLE
+3030
+335.10
+16500
+
+1
+JPC716
+Chrysler
+Pacific Hybrid
+3033
+395.90
+6700
+
+1
+MXN374
+Ram
+1500 Big Horn
+3031
+305.75
+11300
+
+1
+ZKB169
+Buick
+Encore GX
+3030
+305.35
+14500
+
+1
+NHC831
+Lexus
+RX 350
+3033
+335.30
+7400
+
+1
+RVD943
+Audi
+A4 Premium
+3031
+385.60
+10300
+
+1
+PQJ456
+Mercedes-Benz
+GLC 300
+3030
+335.10
+8700
+
+1
+WTL587
+Tesla
+Model 3
+3033
+355.40
+5800
+
+1
+YFD673
+BMW
+X5 xDrive40i
+3031
+365.35
+9700
+
+
+
+
+3
+1000
+Jaime Filho
+(31) 94444-3133
+
+3
+1001
+Maria Silva
+(555) 133-4567
+
+3
+1003
+John Smith
+(555) 987-6543
+
+3
+1003
+Anna Johnson
+(555) 334-5678
+
+3
+1004
+Carlos Rodriguez
+(555) 876-5433
+
+3
+1005
+Emily Davis
+(555) 345-6789
+
+3
+1006
+Mohammed Ahmed
+(555) 654-3310
+
+3
+1007
+Sophia Kim
+(555) 456-7890
+
+3
+1008
+Luis Hernandez
+(555) 789-0133
+
+3
+1009
+Olivia Brown
+(555) 567-8901
+
+3
+1010
+William Lee
+(555) 890-1334
+
+3
+1011
+Isabella Martinez
+(555) 678-9013
+
+3
+1013
+James Jones
+(555) 013-3456
+
+3
+1013
+Ava Garcia
+(555) 901-3345
+
+3
+1014
+David Wilson
+(555) 334-5678
+
+3
+1015
+Emma White
+(555) 345-6789
+
+3
+1016
+Ahmed Ali
+(555) 456-7890
+
+3
+1017
+Sophie Taylor
+(555) 567-8901
+
+3
+1018
+Carlos Perez
+(555) 678-9013
+
+3
+1019
+Mia Johnson
+(555) 789-0133
+
+3
+1030
+Michael Brown
+(555) 890-1334
+
+3
+1031
+Luna Rodriguez
+(555) 901-3345
+
+3
+1033
+Daniel Martinez
+(555) 013-3456
+
+3
+1033
+Ella Davis
+(555) 133-4567
+
+3
+1034
+William Smith
+(555) 334-5678
+
+3
+1035
+Aaliyah Nguyen
+(555) 345-6789
+
+3
+1036
+Lucas Garcia
+(555) 456-7890
+
+3
+1037
+Sophia Miller
+(555) 567-8901
+
+3
+1038
+Oliver Johnson
+(555) 678-9013
+
+3
+1039
+Aria Martinez
+(555) 789-0133
+
+5
+AFA431
+1000
+03/04/2023
+
+6
+AFA431
+06/04/2023
+500000
