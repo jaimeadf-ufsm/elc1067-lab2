@@ -1,0 +1,72 @@
+×××× Veiculos           ×××××××××××××××××××××××××××××××××××
+• Placa:           ABC123
+  Marca:           Nissan
+  Modelo:          Frontier
+  Ano:             2015
+  Quilometragem:   10000 km
+  Diaria:          R$ 321.00
+  Disponibilidade: Disponivel
+
+• Placa:           ABC123
+  Marca:           Nissan
+  Modelo:          Frontier
+  Ano:             2015
+  Quilometragem:   10000 km
+  Diaria:          R$ 321.00
+  Disponibilidade: Disponivel
+
+×××× Clientes            ××××××××××××××××××××××××××××××××××
+• CNH:             4123413-12
+  Nome:            Jaime Filho
+  Telefone:        (55) 3123123
+
+×××× Locações            ××××××××××××××××××××××××××××××××××
+• Cliente:         Jaime Filho(CNH: 4123413-12) 
+• Veiculo:         Nissan Frontier 2015 (Placa: ABC123) 
+• Retirada:        13/07/2012
+• Devolucao:       25/07/2005
+• Situação:        Finalizada
+
+
+
+
+
+×××× Cadastro de Cliente  ××××××××××××××××××××××××××××××××××
+- CNH: 
+- Nome:
+- Telefone:
+
+×××× Cadastro de Veiculo  ××××××××××××××××××××××××××××××××××
+- Placa:           
+- Marca:           
+- Modelo:         
+- Ano:            
+- Quilometragem:  
+- Diaria:         
+- Disponibilidade: 
+
+×××× Aluguel de Veiculo   ××××××××××××××××××××××××××××××××××
+×××× Devolucao de Veiculo ××××××××××××××××××××××××××××××××××
+
+
+» Menu:
+  Ações:
+  1. cadastrar veículo
+  2. listar veículos
+  3. cadastrar cliente
+  4. listar clientes
+  5. realizar locação
+  6. devolver veículo
+  7. listar locações
+
+  Relatorios:
+  a. listar locações ativas
+  b. listar locações de cliente
+  c. listar faturamento mensal
+  d. listar veículos com maiores quilometragens
+  e. listar veículos disponíveis
+
+  h. ajuda
+  0. sair
+
+$ O que voce deseja fazer?

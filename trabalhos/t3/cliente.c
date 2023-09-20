@@ -1,48 +1,49 @@
 #include "cliente.h"
 
-void imprimir_cliente_completo(Cliente *cliente)
+Cliente *criar_cliente(Cliente **lista)
 {
-    printf("- CNH: %s\n", cliente->cnh);
-    printf("- Nome: %s\n", cliente->nome);
-    printf("- Telefone: %s\n", cliente->telefone);
-}
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
 
-void imprimir_cliente_resumido(Cliente *cliente)
-{
-    printf("%s (CNH: %s)\n", cliente->nome, cliente->cnh);
-}
-
-ListaCliente *inserir_cliente(ListaCliente *lista, Cliente *cliente)
-{
-    ListaCliente *no = (ListaCliente *)malloc(sizeof(ListaCliente));
-    no->cliente = *cliente;
-    no->proximo = lista;
-
-    return no;
-}
-
-Cliente *buscar_cliente(ListaCliente *lista, char *cnh)
-{
-    for (ListaCliente *no = lista; no != NULL; no = no->proximo)
+    if (cliente == NULL)
     {
-        if (strcmp(no->cliente.cnh, cnh) == 0)
+        return NULL;
+    }
+
+    cliente->proximo = *lista;
+    *lista = cliente;
+
+    return cliente;
+}
+
+Cliente *buscar_cliente(Cliente *lista, char *cnh)
+{
+    for (Cliente *cliente = lista; cliente != NULL; cliente = cliente->proximo)
+    {
+        if (strcmp(cliente->cnh, cnh) == 0)
         {
-            return &no->cliente;
+            return cliente;
         }
     }
 
     return NULL;
 }
-
-void imprimir_clientes(ListaCliente *lista)
+void imprimir_todos_clientes(Cliente *lista)
 {
-    int numero = 1;
-
-    for (ListaCliente *no = lista; no != NULL; no = no->proximo)
+    for (Cliente *cliente = lista; cliente != NULL; cliente = cliente->proximo)
     {
-        printf("\nCliente %d\n", numero);
-        imprimir_cliente_completo(&no->cliente);
-
-        numero++;
+        imprimir_informacoes_do_cliente(cliente);
     }
+}
+
+void imprimir_resumo_do_cliente(Cliente *cliente)
+{
+    printf("%s (CNH: %s)\n", cliente->nome, cliente->cnh);
+}
+
+void imprimir_informacoes_do_cliente(Cliente *cliente)
+{
+    printf("• CNH:             %s\n", cliente->cnh);
+    printf("  Nome:            %s\n", cliente->nome);
+    printf("  Telefone:        %s\n", cliente->telefone);
+    printf("\n");
 }

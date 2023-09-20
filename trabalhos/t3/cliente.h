@@ -5,31 +5,27 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAMANHO_CNH 20
-#define TAMANHO_NOME 100
-#define TAMANHO_TELEFONE 20
+#define TAMANHO_CNH 21
+#define TAMANHO_NOME 101
+#define TAMANHO_TELEFONE 21
 
 typedef struct cliente Cliente;
-typedef struct lista_cliente ListaCliente;
 
 struct cliente
 {
-    char cnh[TAMANHO_CNH + 1];
-    char nome[TAMANHO_NOME + 1];
-    char telefone[TAMANHO_TELEFONE + 1];
+    char cnh[TAMANHO_CNH];
+    char nome[TAMANHO_NOME];
+    char telefone[TAMANHO_TELEFONE];
+
+    Cliente *proximo;
 };
 
-struct lista_cliente
-{
-    Cliente cliente;
-    ListaCliente *proximo;
-};
+Cliente *criar_cliente(Cliente **lista);
+Cliente *buscar_cliente(Cliente *lista, char *cnh);
 
-void imprimir_cliente_completo(Cliente *cliente);
-void imprimir_cliente_resumido(Cliente *cliente);
+void imprimir_todos_clientes(Cliente *lista);
 
-ListaCliente *inserir_cliente(ListaCliente *lista, Cliente *cliente);
-Cliente *buscar_cliente(ListaCliente *lista, char *cnh);
-void imprimir_clientes(ListaCliente *lista);
+void imprimir_informacoes_do_cliente(Cliente *cliente);
+void imprimir_resumo_do_cliente(Cliente *cliente);
 
 #endif 

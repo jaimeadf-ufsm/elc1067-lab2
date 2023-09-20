@@ -6,42 +6,37 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define TAMANHO_PLACA 10
-#define TAMANHO_MARCA 100
-#define TAMANHO_MODELO 100
+#define TAMANHO_PLACA 21
+#define TAMANHO_MARCA 101
+#define TAMANHO_MODELO 101
 
 typedef struct veiculo Veiculo;
-typedef struct lista_veiculo ListaVeiculo;
 
 struct veiculo
 {
-    char placa[TAMANHO_MARCA + 1];
+    char placa[TAMANHO_PLACA];
 
-    char marca[TAMANHO_MARCA + 1];
-    char modelo[TAMANHO_MODELO + 1];    
-    int ano_de_fabricacao;
+    char marca[TAMANHO_MARCA];
+    char modelo[TAMANHO_MODELO];    
+    int ano;
 
     int quilometragem;
 
     double diaria;
     bool disponivel;
+
+    Veiculo *proximo;
 };
 
-struct lista_veiculo
-{
-    Veiculo veiculo;
-    ListaVeiculo *proximo;
-};
+Veiculo *criar_veiculo(Veiculo **lista);
+Veiculo *buscar_veiculo(Veiculo *lista, char *placa);
 
-void imprimir_veiculo_completo(Veiculo *veiculo);
-void imprimir_veiculo_resumido(Veiculo *veiculo);
+void separar_veiculos_mais_rodados(Veiculo *lista, Veiculo *vetor[], int n);
 
-ListaVeiculo *inserir_veiculo(ListaVeiculo *lista, Veiculo *veiculo);
-Veiculo *buscar_veiculo(ListaVeiculo *lista, char *placa);
+void imprimir_todos_veiculos(Veiculo *lista);
+void imprimir_veiculos_disponiveis(Veiculo *lista);
 
-void imprimir_veiculos(ListaVeiculo *lista);
-void imprimir_veiculos_disponiveis(ListaVeiculo *lista);
-
-void obter_veiculos_mais_rodados(ListaVeiculo *lista, Veiculo **veiculos, int n);
+void imprimir_resumo_do_veiculo(Veiculo *veiculo);
+void imprimir_informacoes_do_veiculo(Veiculo *veiculo);
 
 #endif

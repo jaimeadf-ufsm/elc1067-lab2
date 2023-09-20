@@ -3,160 +3,160 @@ EKB729
 Toyota
 Camry SE
 2022
-225.50
 12500
+225.50
 
 1
 HJL874
 Ford
 F-150 XLT
 2021
-275.25
 21500
+275.25
 
 1
 RPM392
 Honda
 Civic LX
 2020
-190.75
 15400
+190.75
 
 1
 LQN621
 Chevrolet
 Equinox LT
 2022
-245.80
 8500
+245.80
 
 1
 VXG189
 Nissan
 Altima SV
 2021
-210.40
 17200
+210.40
 
 1
 WFD468
 Hyundai
 Tucson SEL
 2020
-199.95
 20500
+199.95
 
 1
 GTR506
 Jeep
 Wrangler Sport
 2022
-315.60
 8900
+315.60
 
 1
 QPL437
 Kia
 Sorento LX
 2021
-255.20
 13500
+255.20
 
 1
 BHN823
 Mazda
 CX-5 Touring
 2020
-215.75
 18500
+215.75
 
 1
 DXY972
 Volkswagen
 Passat SE
 2022
-235.30
 9500
+235.30
 
 1
 KRW365
 Subaru
 Outback Premium
 2021
-265.45
 12400
+265.45
 
 1
 TSF548
 GMC
 Terrain SLE
 2020
-225.10
 16500
+225.10
 
 1
 JPC716
 Chrysler
 Pacific Hybrid
 2022
-295.90
 6700
+295.90
 
 1
 MXN274
 Ram
 1500 Big Horn
 2021
-305.75
 11200
+305.75
 
 1
 ZKB169
 Buick
 Encore GX
 2020
-205.35
 14500
+205.35
 
 1
 NHC821
 Lexus
 RX 350
 2022
-325.20
 7400
+325.20
 
 1
 RVD943
 Audi
 A4 Premium
 2021
-285.60
 10200
+285.60
 
 1
 PQJ456
 Mercedes-Benz
 GLC 300
 2020
-335.10
 8700
+335.10
 
 1
 WTL587
 Tesla
 Model 3
 2022
-355.40
 5800
+355.40
 
 1
 YFD672
 BMW
 X5 xDrive40i
 2021
-365.25
 970
+365.25
 
 3
 1001

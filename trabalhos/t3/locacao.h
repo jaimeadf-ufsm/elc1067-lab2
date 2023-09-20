@@ -6,35 +6,35 @@
 #include "data.h"
 
 typedef struct locacao Locacao;
-typedef struct lista_locacao ListaLocacao;
 
 struct locacao
 {
     Veiculo *veiculo;
     Cliente *cliente;
 
-    Data data_retirada;
-    Data data_devolucao;
+    Data *data_de_retirada;
+    Data *data_de_devolucao;
+    
+    double total;
 
     bool ativa;
+
+    Locacao *proximo;
 };
 
-struct lista_locacao
-{
-    Locacao locacao;
-    ListaLocacao *proximo; 
-};
+Locacao *alugar_veiculo(Locacao **lista, Veiculo *veiculo, Cliente *cliente, Data *data);
+void devolver_veiculo(Locacao *locacao, Data *data, int quilometragem);
+
+Locacao *buscar_locacao_em_andamento(Locacao *lista, char *placa);
+
+bool existe_locacao_em_data(Locacao *lista, char *placa, Data *inicio, Data *fim);
+
+double contabilizar_faturamento(Locacao *lista, int mes, int ano);
+
+void imprimir_todas_locacoes(Locacao *lista);
+void imprimir_locacoes_em_andamento(Locacao *lista);
+void imprimir_locacoes_de_cliente(Locacao *lista, char *cnh);
 
 void imprimir_locacao(Locacao *locacao);
-
-Locacao *buscar_locacao_ativa(ListaLocacao *lista, char *placa);
-
-void imprimir_locacoes_ativas(ListaLocacao *lista);
-void imprimir_locacoes_de_cliente(ListaLocacao *lista, char *cnh);
-
-ListaLocacao *alugar_veiculo(ListaLocacao *lista, Veiculo *veiculo, Cliente *cliente, Data data);
-void devolver_veiculo(Locacao *locacao, Data data, int quilometragem);
-
-double calcular_faturamento_de_locacoes(ListaLocacao *lista, int mes, int ano);
 
 #endif

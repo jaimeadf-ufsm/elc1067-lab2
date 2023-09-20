@@ -9,9 +9,9 @@ typedef struct locadora Locadora;
 
 struct locadora
 {
-    ListaVeiculo *veiculos;
-    ListaCliente *clientes;
-    ListaLocacao *locacoes;
+    Veiculo *veiculos;
+    Cliente *clientes;
+    Locacao *locacoes;
 };
 
 #endif

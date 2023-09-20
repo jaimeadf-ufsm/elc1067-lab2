@@ -1,103 +1,146 @@
 #include "locacao.h"
 
-void imprimir_locacao(Locacao *locacao)
+Locacao *alugar_veiculo(Locacao **lista, Veiculo *veiculo, Cliente *cliente, Data *data)
 {
-    printf("- Veiculo: ");
-    imprimir_veiculo_resumido(locacao->veiculo);
-    printf("- Cliente: ");
-    imprimir_cliente_resumido(locacao->cliente);
-    printf("- Data de retirada: %02d/%02d/%04d\n", locacao->data_retirada.dia, locacao->data_retirada.mes, locacao->data_retirada.ano);
+    Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
 
-    if (locacao->ativa)
+    if (locacao == NULL)
     {
-        printf("- Data de devolucao: (locacao em andamento)\n");
+        return NULL;
     }
-    else
-    {
-        printf("- Data de devolucao: %02d/%02d/%04d\n", locacao->data_devolucao.dia, locacao->data_devolucao.mes, locacao->data_devolucao.ano);
-    }
+
+    veiculo->disponivel = false;
+
+    locacao->veiculo = veiculo;
+    locacao->cliente = cliente;
+    locacao->data_de_retirada = data;
+    locacao->data_de_devolucao = NULL;
+    locacao->total = 0.0;
+    locacao->ativa = true;
+    locacao->proximo = *lista;
+
+    *lista = locacao;
+
+    return locacao;
 }
 
-Locacao *buscar_locacao_ativa(ListaLocacao *lista, char *placa)
+void devolver_veiculo(Locacao *locacao, Data *data, int quilometragem)
 {
-    for (ListaLocacao *no = lista; no != NULL; no = no->proximo)
-    {        
-        if (no->locacao.ativa && strcmp(no->locacao.veiculo->placa, placa) == 0)
+    int duracao = diferenca_em_dias(locacao->data_de_retirada, data) + 1;
+
+    locacao->data_de_devolucao = data;
+    locacao->total = duracao * locacao->veiculo->diaria;
+    locacao->ativa = false;
+
+    locacao->veiculo->quilometragem = quilometragem;
+    locacao->veiculo->disponivel = true;
+}
+
+Locacao *buscar_locacao_em_andamento(Locacao *lista, char *placa)
+{
+    for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
+    {
+        if (strcmp(locacao->veiculo->placa, placa) == 0 && locacao->ativa)
         {
-            return &no->locacao; 
+            return locacao;
         }
     }
 
     return NULL;
 }
 
-void imprimir_locacoes_ativas(ListaLocacao *lista)
+bool existe_locacao_em_data(Locacao *lista, char *placa, Data *inicio, Data *fim)
 {
-    int numero = 1;
-
-    for (ListaLocacao *no = lista; no != NULL; no = no->proximo)
+    for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
     {
-        if (no->locacao.ativa)
+        if (locacao->ativa)
         {
-            printf("\nLocacao %d\n", numero);
-            imprimir_locacao(&no->locacao);
+            continue;
+        }
 
-            numero++;
+        if (strcmp(locacao->veiculo->placa, placa) != 0)
+        {
+            continue;
+        }
+
+        if (existe_sobreposicao_entre_datas(locacao->data_de_retirada, locacao->data_de_devolucao, inicio, fim))
+        {
+            return true;
         }
     }
+
+    return false;
 }
 
-void imprimir_locacoes_de_cliente(ListaLocacao *lista, char *cnh)
-{
-    int numero = 1;
-
-    for (ListaLocacao *no = lista; no != NULL; no = no->proximo)
-    {
-        if (strcmp(no->locacao.cliente->cnh, cnh) == 0)
-        {
-            printf("\nLocacao %d\n", numero);
-            imprimir_locacao(&no->locacao);
-
-            numero++;
-        }
-    }
-}
-
-ListaLocacao *alugar_veiculo(ListaLocacao *lista, Veiculo *veiculo, Cliente *cliente, Data data)
-{
-    ListaLocacao *no = (ListaLocacao *)malloc(sizeof(ListaLocacao));
-    no->locacao.veiculo = veiculo;
-    no->locacao.cliente = cliente;
-    no->locacao.data_retirada = data;
-    no->locacao.data_devolucao = (Data){0, 0, 0};
-    no->locacao.ativa = true;
-    no->proximo = lista;
-
-    no->locacao.veiculo->disponivel = false;
-
-    return no;
-}
-
-void devolver_veiculo(Locacao *locacao, Data data, int quilometragem)
-{
-    locacao->veiculo->disponivel = true;
-    locacao->veiculo->quilometragem = quilometragem;
-    locacao->data_devolucao = data;
-    locacao->ativa = false;
-}
-
-double calcular_faturamento_de_locacoes(ListaLocacao *lista, int mes, int ano)
+double contabilizar_faturamento(Locacao *lista, int mes, int ano)
 {
     double faturamento = 0.0;
 
-    for (ListaLocacao *no = lista; no != NULL; no = no->proximo)
+    for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
     {
-        if (no->locacao.data_devolucao.ano == ano && no->locacao.data_devolucao.mes == mes)
+        if (locacao->ativa)
         {
-            int dias = calcular_diferenca_de_dias(no->locacao.data_retirada, no->locacao.data_devolucao);
-            faturamento += no->locacao.veiculo->diaria * dias; 
+            continue;
         }
+
+        if (locacao->data_de_retirada->mes != mes || locacao->data_de_retirada->ano != ano)
+        {
+            continue;
+        }
+
+        faturamento += locacao->total;
     }
 
     return faturamento;
+}
+
+void imprimir_todas_locacoes(Locacao *lista)
+{
+    for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
+    {
+        imprimir_locacao(locacao);
+    }
+}
+
+
+void imprimir_locacoes_em_andamento(Locacao *lista)
+{
+    for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
+    {
+        if (locacao->ativa)
+        {
+            imprimir_locacao(locacao);
+        }
+    }
+}
+
+void imprimir_locacoes_de_cliente(Locacao *lista, char *cnh)
+{
+    for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
+    {
+        if (strcmp(locacao->cliente->cnh, cnh) == 0)
+        {
+            imprimir_locacao(locacao);
+        }
+    }
+}
+
+void imprimir_locacao(Locacao *locacao)
+{
+    printf("• Veiculo:         ");
+    imprimir_resumo_do_veiculo(locacao->veiculo);
+    printf("  Cliente:         ");
+    imprimir_resumo_do_cliente(locacao->cliente);
+    printf("  Retirada:        ");
+    imprimir_data(locacao->data_de_retirada);
+
+    if (!locacao->ativa)
+    {
+        printf("  Devolução:       ");
+        imprimir_data(locacao->data_de_devolucao);
+        printf("  Total:           R$ %.2lf\n", locacao->total);
+    }
+
+    printf("  Situação:        %s\n", locacao->ativa ? "Em andamento" : "Encerrada");
+    printf("\n");
 }

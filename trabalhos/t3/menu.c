@@ -1,224 +1,343 @@
 #include "menu.h"
 
-#define NUMERO_VEICULOS_MAIS_RODADOS 3
+#define LARGURA_CABECALHO 80
+#define TAMANHO_VEICULOS_MAIS_RODADOS 3
 
-void cadastrar_veiculo(Locadora *locadora)
+void repetir_texto(char *texto, int n)
 {
-    Veiculo veiculo;
-
-    printf("\nCadastro de Veiculos:\n");
-
-    printf("Digite a placa do veiculo: ");
-    scanf(" %10s", veiculo.placa);
-
-    printf("Digite a marca do veiculo: ");
-    scanf(" %100[^\n]", veiculo.marca);
-
-    printf("Digite o modelo do veiculo: ");
-    scanf(" %100[^\n]", veiculo.modelo);
-
-    printf("Digite o ano de fabricacao do veiculo: ");
-    scanf("%d", &veiculo.ano_de_fabricacao);
-
-    printf("Digite o valor da diaria do veiculo: ");
-    scanf("%lf", &veiculo.diaria);
-
-    printf("Digite a quilometragem do veiculo: ");
-    scanf("%d", &veiculo.quilometragem);
-
-    veiculo.disponivel = true;
-
-    locadora->veiculos = inserir_veiculo(locadora->veiculos, &veiculo);
+    for (int i = 0; i < n; i++)
+    {
+        printf("%s", texto);
+    }
 }
 
-void listar_veiculos(Locadora *locadora)
+void imprimir_cabecalho(char *titulo)
 {
-    printf("\nVeiculos:\n");
-    imprimir_veiculos(locadora->veiculos);
+    printf("» %s ", titulo);
+    repetir_texto("«", LARGURA_CABECALHO - strlen(titulo) - 3);
+    printf("\n");
 }
 
-void cadastrar_cliente(Locadora *locadora)
+void ler_data(Data *data)
 {
-    Cliente cliente;
-
-    printf("\nCadastro de Clientes:\n");
-
-    printf("Digite a CNH do cliente: ");
-    scanf(" %20[^\n]", cliente.cnh);
-
-    printf("Digite o nome do cliente: ");
-    scanf(" %100[^\n]", cliente.nome);
-
-    printf("Digite o telefone do cliente: ");
-    scanf(" %20[^\n]", cliente.telefone);
-
-    locadora->clientes = inserir_cliente(locadora->clientes, &cliente);
+    printf("- Data (d/m/a):    ");
+    scanf(" %d/%d/%d", &data->dia, &data->mes, &data->ano);
 }
 
-void listar_clientes(Locadora *locadora)
+Cliente *perguntar_cliente(Locadora *locadora)
 {
-    printf("\nClientes:\n");
-    imprimir_clientes(locadora->clientes);
+    char cnh[TAMANHO_CNH];
+
+    printf("- CNH:             ");
+    scanf(" %20[^\n]", cnh);
+
+    Cliente *cliente = buscar_cliente(locadora->clientes, cnh);
+
+    if (cliente == NULL)
+    {
+        printf("ERRO: A CNH '%s' não está cadastrada no banco de clientes.\n", cnh);
+    }
+
+    return cliente;
 }
 
-void realizar_locacao(Locadora *locadora)
+Veiculo *perguntar_veiculo(Locadora *locadora)
 {
-    char placa[TAMANHO_PLACA + 1];
-    char cnh[TAMANHO_CNH + 1];
+    char placa[TAMANHO_PLACA];
 
-    printf("\nRealizar locacao:\n");
-
-    printf("Digite a placa do veiculo: ");
-    scanf(" %10s", placa);
+    printf("- Placa:           ");
+    scanf(" %20[^\n]", placa);
 
     Veiculo *veiculo = buscar_veiculo(locadora->veiculos, placa);
 
     if (veiculo == NULL)
     {
-        printf("Nenhum veiculo com a placa %s foi encontrado\n", placa);
+        printf("ERRO: A placa '%s' não está cadastrada no banco de veículos.\n", placa);
+    }
+
+    return veiculo;
+}
+
+Data *perguntar_data_de_retirada(Locadora *locadora, Veiculo *veiculo)
+{
+    Data *data = criar_data();
+    bool valida = false;
+    
+    while (!valida)
+    {
+        ler_data(data);
+
+        if (existe_locacao_em_data(locadora->locacoes, veiculo->placa, data, data))
+        {
+            printf("ERRO: O veículo já foi alugado nesta data.\n");
+            continue;
+        }
+
+        valida = true;
+    }
+
+    return data;
+}
+
+Data *perguntar_data_de_devolucao(Locadora *locadora, Locacao *locacao)
+{
+    Data *data = criar_data();
+    bool valida = false;
+    
+    while (!valida)
+    {
+        ler_data(data);
+
+        if (diferenca_em_dias(locacao->data_de_retirada, data) < 0)
+        {
+            printf("ERRO: A data de devolução precisa ser após a data de retirada.\n");
+            continue;
+        }
+
+        if (existe_locacao_em_data(locadora->locacoes, locacao->veiculo->placa, locacao->data_de_retirada, data))
+        {
+            printf("ERRO: O veículo já foi alugado nesta data.\n");
+            continue;
+        }
+
+        valida = true;
+    }
+
+    return data;
+}
+
+int perguntar_nova_quilometragem(Veiculo *veiculo)
+{
+    int quilometragem;
+
+    do {
+        printf("- Quilometragem:   ");
+        scanf(" %d", &quilometragem);
+
+        if (quilometragem < veiculo->quilometragem)
+        {
+            printf("ERRO: A nova quilometragem precisa ser maior que a anterior.\n");
+        }
+    } while (quilometragem < veiculo->quilometragem);
+
+    return quilometragem;
+}
+
+void opcao_cadastrar_veiculo(Locadora *locadora)
+{
+    imprimir_cabecalho("Cadastro de Veículo");
+
+    Veiculo *veiculo = criar_veiculo(&locadora->veiculos);
+
+    if (veiculo == NULL)
+    {
+        printf("ERRO: Ocorreu um problema ao alocar o veículo.\n");
+        return;
+    }
+
+    printf("- Placa:           ");
+    scanf(" %20[^\n]", veiculo->placa);
+
+    printf("- Marca:           ");
+    scanf(" %100[^\n]", veiculo->marca);
+
+    printf("- Modelo:          ");
+    scanf(" %100[^\n]", veiculo->modelo);
+
+    printf("- Ano:             ");
+    scanf(" %d", &veiculo->ano);
+
+    printf("- Quilometragem:   ");
+    scanf(" %d", &veiculo->quilometragem);
+
+    printf("- Diária:          R$ ");
+    scanf(" %lf", &veiculo->diaria);
+
+    veiculo->disponivel = true;
+}
+
+void opcao_listar_veiculos(Locadora *locadora)
+{
+    imprimir_cabecalho("Veículos");
+    imprimir_todos_veiculos(locadora->veiculos);
+}
+
+void opcao_cadastrar_cliente(Locadora *locadora)
+{
+    imprimir_cabecalho("Cadastro de Cliente");
+
+    Cliente *cliente = criar_cliente(&locadora->clientes);
+
+    if (cliente == NULL)
+    {
+        printf("ERRO: Ocorreu um problema ao alocar o cliente.\n");
+        return;
+    }
+
+    printf("- CNH:             ");
+    scanf(" %20[^\n]", cliente->cnh);
+
+    printf("- Nome:            ");
+    scanf(" %100[^\n]", cliente->nome);
+
+    printf("- Telefone:        ");
+    scanf(" %20[^\n]", cliente->telefone);
+}
+
+void opcao_listar_clientes(Locadora *locadora)
+{
+    imprimir_cabecalho("Clientes");
+    imprimir_todos_clientes(locadora->clientes);
+}
+
+void opcao_realizar_locacao(Locadora *locadora)
+{
+    imprimir_cabecalho("Alugar Veículo");
+
+    Veiculo *veiculo = perguntar_veiculo(locadora);
+
+    if (veiculo == NULL)
+    {
         return;
     }
 
     if (!veiculo->disponivel)
     {
-        printf("O veiculo de placa %s nao esta disponivel.\n", placa);
+        printf("ERRO: O veículo ja está locado no momento.\n");
         return;
     }
 
-    printf("Digite a CNH do cliente: ");
-    scanf(" %20s", cnh);
-
-    Cliente *cliente = buscar_cliente(locadora->clientes, cnh);
+    Cliente *cliente = perguntar_cliente(locadora);
 
     if (cliente == NULL)
     {
-        printf("Nenhum cliente com a CNH %s foi encontrado.\n", cnh);
         return;
     }
 
-    Data data;
+    Data *data = perguntar_data_de_retirada(locadora, veiculo);
 
-    printf("Digite a data de inicio da locacao (dd/mm/aaaa): ");
-    scanf("%d/%d/%d", &data.dia, &data.mes, &data.ano);
-
-    locadora->locacoes = alugar_veiculo(locadora->locacoes, veiculo, cliente, data);
+    alugar_veiculo(&locadora->locacoes, veiculo, cliente, data);
 }
 
-void realizar_devolucao(Locadora *locadora)
+void opcao_devolver_veiculo(Locadora *locadora)
 {
-    char placa[TAMANHO_PLACA + 1];
+    imprimir_cabecalho("Devolver Veículo");
 
-    printf("\nRealizar devolucao:\n");
+    Veiculo *veiculo = perguntar_veiculo(locadora);
 
-    printf("Digite a placa do veiculo: ");
-    scanf(" %10s", placa);
+    if (veiculo == NULL)
+    {
+        return;
+    }
 
-    Locacao *locacao = buscar_locacao_ativa(locadora->locacoes, placa);
+    Locacao *locacao = buscar_locacao_em_andamento(locadora->locacoes, veiculo->placa);
 
     if (locacao == NULL)
     {
-        printf("Nenhuma locacao ativa para o veiculo de placa %s foi encontrada\n", placa);
+        printf("ERRO: O veículo não está locado no momento.\n");
         return;
     }
 
-    Data data;
-
-    printf("Digite a data de fim da locacao (dd/mm/aaaa): ");
-    scanf("%d/%d/%d", &data.dia, &data.mes, &data.ano);
-
-    int quilometragem;
-
-    printf("Digite a nova quilometragem do veiculo: ");
-    scanf("%d", &quilometragem);
+    Data *data = perguntar_data_de_devolucao(locadora, locacao);
+    int quilometragem = perguntar_nova_quilometragem(locacao->veiculo);
 
     devolver_veiculo(locacao, data, quilometragem);
+
+    printf("\n");
+    printf("- Total a pagar:   R$ %.2lf\n", locacao->total);
 }
 
-void listar_locacoes_ativas(Locadora *locadora)
+void opcao_listar_locacoes(Locadora *locadora)
 {
-    printf("\nLocacoes ativas:\n");
-    imprimir_locacoes_ativas(locadora->locacoes);
+    imprimir_cabecalho("Locações");
+    imprimir_todas_locacoes(locadora->locacoes);
 }
 
-void listar_locacoes_de_cliente(Locadora *locadora)
+void opcao_listar_locacoes_ativas(Locadora *locadora)
 {
-    char cnh[TAMANHO_CNH + 1];
+    imprimir_cabecalho("Locações Ativas");
+    imprimir_locacoes_em_andamento(locadora->locacoes);
+}
 
-    printf("\nLocacoes de um cliente:\n");
+void opcao_listar_locacoes_de_cliente(Locadora *locadora)
+{
+    imprimir_cabecalho("Locações de Cliente");
 
-    printf("Digite a CNH do cliente: ");
-    scanf(" %20s", cnh);
-
-    Cliente *cliente = buscar_cliente(locadora->clientes, cnh);
+    Cliente *cliente = perguntar_cliente(locadora);
 
     if (cliente == NULL)
     {
-        printf("Nenhum cliente com a CNH %s foi encontrado\n", cnh);
         return;
     }
 
-    printf("\nLocacoes de %s:\n", cliente->nome);
-    imprimir_locacoes_de_cliente(locadora->locacoes, cnh);
+    imprimir_locacoes_de_cliente(locadora->locacoes, cliente->cnh);
 }
 
-void contabilizar_faturamento_mensal(Locadora *locadora)
+void opcao_listar_faturamento_mensal(Locadora *locadora)
 {
+    imprimir_cabecalho("Faturamento");
+
     int mes, ano;
 
-    printf("\nFaturamento mensal:\n");
-    printf("Digite o mes/ano: ");
-    scanf("%d/%d", &mes, &ano);
+    printf("- Mês:             ");
+    scanf(" %d", &mes);
 
-    double faturamento = calcular_faturamento_de_locacoes(locadora->locacoes, mes, ano);
+    printf("- Ano:             ");
+    scanf(" %d", &ano);
 
-    printf("O faturamento de %02d/%04d foi de R$%.2lf.\n", mes, ano, faturamento);
+    double faturamento = contabilizar_faturamento(locadora->locacoes, mes, ano);
+
+    printf("\n");
+    printf("- Faturamento:     R$ %.2lf\n", faturamento);
 }
 
-void listar_veiculos_mais_rodados(Locadora *locadora)
+void opcao_listar_veiculos_mais_rodados(Locadora *locadora)
 {
-    Veiculo *veiculos[NUMERO_VEICULOS_MAIS_RODADOS];
-    obter_veiculos_mais_rodados(locadora->veiculos, veiculos, NUMERO_VEICULOS_MAIS_RODADOS);
+    imprimir_cabecalho("Mais Rodados");
 
-    printf("\nVeiculos mais rodados:\n");
+    Veiculo *vetor[TAMANHO_VEICULOS_MAIS_RODADOS];
+    separar_veiculos_mais_rodados(locadora->veiculos, vetor, TAMANHO_VEICULOS_MAIS_RODADOS);
 
-    for (int i = 0; i < NUMERO_VEICULOS_MAIS_RODADOS; i++)
+    for (int i = 0; i < TAMANHO_VEICULOS_MAIS_RODADOS; i++)
     {
-        if (veiculos[i] == NULL)
+        if (vetor[i] == NULL)
         {
             break;
         }
 
-        printf("%d (%d km). ", i + 1, veiculos[i]->quilometragem);
-        imprimir_veiculo_resumido(veiculos[i]);
+        printf("%d. %d km\n", i + 1, vetor[i]->quilometragem);
+        printf("   ");
+        imprimir_resumo_do_veiculo(vetor[i]);
     }
 }
 
-void listar_veiculos_disponiveis(Locadora *locadora)
+void opcao_listar_veiculos_disponiveis(Locadora *locadora)
 {
-    printf("\nVeiculos disponiveis:\n");
+    imprimir_cabecalho("Veículos Disponíveis");
     imprimir_veiculos_disponiveis(locadora->veiculos);
 }
 
-void imprimir_menu()
+void opcao_ajuda()
 {
-    printf("\n========== Menu ==========\n");
-    printf("Acoes:\n");
-    printf("1. cadastrar veiculo.\n");
-    printf("2. listar veiculos.\n");
-    printf("3. cadastrar cliente.\n");
-    printf("4. listar clientes.\n");
-    printf("5. realizar locacao.\n");
-    printf("6. realizar devolucao.\n");
-
-    printf("\nRelatorios:\n");
-    printf("a. listar locacoes ativas.\n");
-    printf("b. listar locacoes de um cliente.\n");
-    printf("c. contabilizar faturamento mensal.\n");
-    printf("d. listar veiculos mais rodados.\n");
-    printf("e. listar veiculos disponiveis.\n");
+    printf("» Menu:\n");
+    printf("Ações:\n");
+    printf("  1. cadastrar veículo\n");
+    printf("  2. listar veículos\n");
+    printf("  3. cadastrar cliente\n");
+    printf("  4. listar clientes\n");
+    printf("  5. realizar locação\n");
+    printf("  6. devolver veículo\n");
+    printf("  7. listar locações\n");
     printf("\n");
-    printf("0. sair\n");
+    printf("Relatórios:\n");
+    printf("  a. listar locações ativas\n");
+    printf("  b. listar locações de cliente\n");
+    printf("  c. listar faturamento mensal\n");
+    printf("  d. listar veículos com maiores quilometragens\n");
+    printf("  e. listar veículos disponíveis\n");
     printf("\n");
+    printf("  h. ajuda\n");
+    printf("  0. sair\n");
 }
 
 void menu(Locadora *locadora)
@@ -227,9 +346,7 @@ void menu(Locadora *locadora)
 
     do
     {
-        imprimir_menu();
-
-        printf("O que voce deseja fazer? ");
+        printf("$ O que você deseja fazer ('h' para ajuda)? ");
         scanf(" %c", &opcao);
 
         switch (opcao)
@@ -237,41 +354,49 @@ void menu(Locadora *locadora)
         case '0':
             break;
         case '1':
-            cadastrar_veiculo(locadora);
+            opcao_cadastrar_veiculo(locadora);
             break;
         case '2':
-            listar_veiculos(locadora);
+            opcao_listar_veiculos(locadora);
             break;
         case '3':
-            cadastrar_cliente(locadora);
+            opcao_cadastrar_cliente(locadora);
             break;
         case '4':
-            listar_clientes(locadora);
+            opcao_listar_clientes(locadora);
             break;
         case '5':
-            realizar_locacao(locadora);
+            opcao_realizar_locacao(locadora);
             break;
         case '6':
-            realizar_devolucao(locadora);
+            opcao_devolver_veiculo(locadora);
+            break;
+        case '7':
+            opcao_listar_locacoes(locadora);
             break;
         case 'a':
-            listar_locacoes_ativas(locadora);
+            opcao_listar_locacoes_ativas(locadora);
             break;
         case 'b':
-            listar_locacoes_de_cliente(locadora);
+            opcao_listar_locacoes_de_cliente(locadora);
             break;
         case 'c':
-            contabilizar_faturamento_mensal(locadora);
+            opcao_listar_faturamento_mensal(locadora);
             break;
         case 'd':
-            listar_veiculos_mais_rodados(locadora);
+            opcao_listar_veiculos_mais_rodados(locadora);
             break;
         case 'e':
-            listar_veiculos_disponiveis(locadora);
+            opcao_listar_veiculos_disponiveis(locadora);
+            break;
+        case 'h':
+            opcao_ajuda();
             break;
         default:
-            printf("Opcao invalida.\n");
+            printf("ERRO: Opção inválida.\n");
             break;
         }
+
+        printf("\n");
     } while (opcao != '0');
 }
