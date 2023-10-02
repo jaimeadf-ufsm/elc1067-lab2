@@ -244,7 +244,7 @@ void opcao_devolver_veiculo(Locadora *locadora)
     devolver_veiculo(locacao, data, quilometragem);
 
     printf("\n");
-    printf("- Total a pagar:   R$ %.2lf\n", locacao->total);
+    printf("• Total a pagar:   R$ %.2lf\n", locacao->total);
 }
 
 void opcao_listar_locacoes(Locadora *locadora)
@@ -288,7 +288,7 @@ void opcao_listar_faturamento_mensal(Locadora *locadora)
     double faturamento = contabilizar_faturamento(locadora->locacoes, mes, ano);
 
     printf("\n");
-    printf("- Faturamento:     R$ %.2lf\n", faturamento);
+    printf("• Faturamento:     R$ %.2lf\n", faturamento);
 }
 
 void opcao_listar_veiculos_mais_rodados(Locadora *locadora)
