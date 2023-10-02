@@ -26,7 +26,12 @@ Locacao *alugar_veiculo(Locacao **lista, Veiculo *veiculo, Cliente *cliente, Dat
 
 void devolver_veiculo(Locacao *locacao, Data *data, int quilometragem)
 {
-    int duracao = diferenca_em_dias(locacao->data_de_retirada, data) + 1;
+    int duracao = diferenca_em_dias(locacao->data_de_retirada, data);
+
+    if (duracao <= 0)
+    {
+        duracao = 1;
+    }
 
     locacao->data_de_devolucao = data;
     locacao->total = duracao * locacao->veiculo->diaria;
