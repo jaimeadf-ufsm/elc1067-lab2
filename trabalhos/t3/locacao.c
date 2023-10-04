@@ -54,7 +54,22 @@ Locacao *buscar_locacao_em_andamento(Locacao *lista, char *placa)
     return NULL;
 }
 
-bool existe_locacao_em_data(Locacao *lista, char *placa, Data *inicio, Data *fim)
+bool verificar_locacao_sobrepoe_data(Locacao *locacao, Data *data)
+{
+    if (locacao->ativa)
+    {
+        return diferenca_em_dias(locacao->data_de_retirada, data) >= 0;
+    }
+
+    return existe_sobreposicao_entre_datas(
+        locacao->data_de_retirada,
+        locacao->data_de_devolucao,
+        data,
+        data
+    );
+}
+
+bool existe_locacao_encerrada_em_data(Locacao *lista, char *placa, Data *inicio, Data *fim)
 {
     for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
     {
@@ -108,11 +123,11 @@ void imprimir_todas_locacoes(Locacao *lista)
 }
 
 
-void imprimir_locacoes_em_andamento(Locacao *lista)
+void imprimir_locacoes_em_data(Locacao *lista, Data *data)
 {
     for (Locacao *locacao = lista; locacao != NULL; locacao = locacao->proximo)
     {
-        if (locacao->ativa)
+        if (verificar_locacao_sobrepoe_data(locacao, data))
         {
             imprimir_locacao(locacao);
         }

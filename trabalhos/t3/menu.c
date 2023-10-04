@@ -67,7 +67,7 @@ Data *perguntar_data_de_retirada(Locadora *locadora, Veiculo *veiculo)
     {
         ler_data(data);
 
-        if (existe_locacao_em_data(locadora->locacoes, veiculo->placa, data, data))
+        if (existe_locacao_encerrada_em_data(locadora->locacoes, veiculo->placa, data, data))
         {
             printf("ERRO: O veículo já foi alugado nesta data.\n");
             continue;
@@ -94,7 +94,7 @@ Data *perguntar_data_de_devolucao(Locadora *locadora, Locacao *locacao)
             continue;
         }
 
-        if (existe_locacao_em_data(locadora->locacoes, locacao->veiculo->placa, locacao->data_de_retirada, data))
+        if (existe_locacao_encerrada_em_data(locadora->locacoes, locacao->veiculo->placa, locacao->data_de_retirada, data))
         {
             printf("ERRO: O veículo já foi alugado nesta data.\n");
             continue;
@@ -256,7 +256,13 @@ void opcao_listar_locacoes(Locadora *locadora)
 void opcao_listar_locacoes_ativas(Locadora *locadora)
 {
     imprimir_cabecalho("Locações Ativas");
-    imprimir_locacoes_em_andamento(locadora->locacoes);
+
+    Data *data = criar_data();
+    ler_data(data);
+
+    imprimir_locacoes_em_data(locadora->locacoes, data);
+
+    free(data);
 }
 
 void opcao_listar_locacoes_de_cliente(Locadora *locadora)
