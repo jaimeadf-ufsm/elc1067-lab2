@@ -1,0 +1,1 @@
+Todos os requisitos foram implementados.
