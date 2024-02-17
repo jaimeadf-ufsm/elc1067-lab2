@@ -1,0 +1,819 @@
+1
+2001
+Introduction to Psychology
+Smith Hall
+
+1
+3002
+English Composition
+Humanities Building
+
+1
+1103
+Chemistry 101
+Chemistry Lab Building
+
+1
+4004
+History of Art
+Fine Arts Center
+
+1
+2205
+Computer Science Fundamentals
+Engineering Building
+
+1
+5106
+Environmental Science
+Environmental Science Lab
+
+1
+1207
+Physics for Engineers
+Physics Building
+
+1
+3208
+Literature and Film
+Media Studies Building
+
+1
+2309
+Digital Marketing
+Business School
+
+1
+4310
+Organic Chemistry
+Chemistry Lab Building
+
+1
+2511
+Data Structures and Algorithms
+Computer Science Building
+
+1
+1612
+Statistics for Social Sciences
+Social Sciences Building
+
+1
+3613
+Introduction to Philosophy
+Philosophy Department
+
+1
+2714
+Microeconomics
+Economics Building
+
+1
+1415
+Introduction to Astronomy
+Astronomy Observatory
+
+1
+5516
+Environmental Ethics
+Environmental Studies Department
+
+1
+1917
+Introduction to Political Science
+Social Sciences Building
+
+1
+4718
+Sociology of Culture
+Sociology Department
+
+1
+2419
+Business Ethics
+Business School
+
+1
+5820
+Introduction to Geology
+Geology Department
+
+3
+2001
+202311001
+Emma Johnson
+2020
+
+3
+2001
+202311002
+Daniel Miller
+2021
+
+3
+2001
+202311003
+Olivia Smith
+2019
+
+3
+2001
+202311004
+William Davis
+2022
+
+3
+2001
+202311005
+Sophia Wilson
+2023
+
+3
+2001
+202311006
+James Jones
+2018
+
+3
+2001
+202311007
+Ava Brown
+2021
+
+3
+2001
+202311008
+Liam Taylor
+2020
+
+3
+2001
+202311009
+Isabella Clark
+2019
+
+3
+2001
+202311010
+Elijah White
+2022
+
+3
+3002
+202320001
+Charlotte Adams
+2022
+
+3
+3002
+202320002
+Mason Hall
+2021
+
+3
+3002
+202320003
+Amelia Young
+2018
+
+3
+3002
+202320004
+Ethan Martin
+2023
+
+3
+3002
+202320005
+Lily Turner
+2019
+
+3
+3002
+202320006
+Logan Harris
+2020
+
+3
+3002
+202320007
+Abigail King
+2019
+
+3
+3002
+202320008
+Jackson Lewis
+2022
+
+3
+3002
+202320009
+Harper Scott
+2021
+
+3
+3002
+202320010
+Benjamin Wright
+2022
+
+3
+1103
+202311101
+Sophia Parker
+2021
+
+3
+1103
+202311102
+Jackson Allen
+2019
+
+3
+1103
+202311103
+Emma Harris
+2020
+
+3
+1103
+202311104
+Liam Turner
+2023
+
+3
+1103
+202311105
+Olivia Mitchell
+2022
+
+3
+1103
+202311106
+Aiden Nelson
+2018
+
+3
+1103
+202311107
+Ava Edwards
+2021
+
+3
+1103
+202311108
+Noah Wilson
+2019
+
+3
+1103
+202311109
+Isabella White
+2022
+
+3
+1103
+202311110
+Ethan Hall
+2023
+
+3
+4004
+202340001
+Oliver Turner
+2021
+
+3
+4004
+202340002
+Nora Martinez
+2018
+
+3
+4004
+202340003
+Henry Lewis
+2020
+
+3
+4004
+202340004
+Sophia Parker
+2019
+
+3
+4004
+202340005
+Liam Davis
+2022
+
+3
+4004
+202340006
+Ella Clark
+2019
+
+3
+4004
+202340007
+William Harris
+2021
+
+3
+4004
+202340008
+Ava Jackson
+2018
+
+3
+4004
+202340009
+Mason Taylor
+2022
+
+3
+4004
+202340010
+Charlotte White
+2023
+
+3
+2205
+202322001
+Ethan Smith
+2019
+
+3
+2205
+202322002
+Olivia Davis
+2020
+
+3
+2205
+202322003
+Liam Jackson
+2021
+
+3
+2205
+202322004
+Emma Wilson
+2023
+
+3
+2205
+202322005
+Aiden Harris
+2018
+
+3
+2205
+202322006
+Isabella Turner
+2022
+
+3
+2205
+202322007
+Mason Hall
+2019
+
+3
+2205
+202322008
+Ava Clark
+2022
+
+3
+2205
+202322009
+Jackson Martin
+2021
+
+3
+2205
+202322010
+Sophia Turner
+2019
+
+3
+5106
+202351001
+Liam Martin
+2019
+
+3
+5106
+202351002
+Emma Smith
+2021
+
+3
+5106
+202351003
+Jackson Davis
+2018
+
+3
+5106
+202351004
+Sophia Taylor
+2022
+
+3
+5106
+202351005
+Noah White
+2019
+
+3
+5106
+202351006
+Ava Clark
+2020
+
+3
+5106
+202351007
+Olivia Turner
+2023
+
+3
+5106
+202351008
+Ethan Wilson
+2018
+
+3
+5106
+202351009
+Isabella Harris
+2022
+
+3
+5106
+202351010
+Mason Turner
+2021
+
+3
+1207
+202312001
+Ella Robinson
+2020
+
+3
+1207
+202312002
+Liam Turner
+2018
+
+3
+1207
+202312003
+Ava White
+2021
+
+3
+1207
+202312004
+Noah Davis
+2019
+
+3
+1207
+202312005
+Sophia Smith
+2022
+
+3
+3208
+202332001
+Olivia Jackson
+2020
+
+3
+3208
+202332002
+Ethan Wilson
+2019
+
+3
+3208
+202332003
+Aiden Clark
+2018
+
+3
+3208
+202332004
+Mason Harris
+2021
+
+3
+3208
+202332005
+Sophia Turner
+2022
+
+3
+2309
+202323001
+Charlotte Davis
+2019
+
+3
+2309
+202323002
+Ella Martin
+2021
+
+3
+2309
+202323003
+Noah White
+2018
+
+3
+2309
+202323004
+Ava Turner
+2020
+
+3
+2309
+202323005
+Liam Robinson
+2022
+
+3
+4310
+202343001
+Sophia Harris
+2019
+
+3
+4310
+202343002
+Ethan Turner
+2020
+
+3
+4310
+202343003
+Aiden Davis
+2018
+
+3
+4310
+202343004
+Isabella Smith
+2021
+
+3
+4310
+202343005
+Mason Wilson
+2022
+
+3
+2511
+202325001
+Liam Jackson
+2019
+
+3
+2511
+202325002
+Olivia Harris
+2020
+
+3
+2511
+202325003
+Ava Turner
+2021
+
+3
+2511
+202325004
+Ethan Wilson
+2018
+
+3
+2511
+202325005
+Sophia Davis
+2022
+
+3
+1612
+202316001
+Aiden Smith
+2018
+
+3
+1612
+202316002
+Sophia Davis
+2019
+
+3
+1612
+202316003
+Ella Turner
+2020
+
+3
+1612
+202316004
+Noah Harris
+2021
+
+3
+1612
+202316005
+Mason Wilson
+2022
+
+3
+3613
+202336001
+Liam Jackson
+2018
+
+3
+3613
+202336002
+Ava Smith
+2019
+
+3
+3613
+202336003
+Olivia Turner
+2020
+
+3
+3613
+202336004
+Ethan Martin
+2021
+
+3
+3613
+202336005
+Sophia Davis
+2022
+
+3
+2714
+202327001
+Mason Harris
+2018
+
+3
+2714
+202327002
+Sophia Turner
+2019
+
+3
+2714
+202327003
+Ella Davis
+2020
+
+3
+2714
+202327004
+Liam Wilson
+2021
+
+3
+2714
+202327005
+Ava Smith
+2022
+
+3
+1415
+202314001
+Noah Davis
+2019
+
+3
+1415
+202314002
+Sophia Turner
+2020
+
+3
+1415
+202314003
+Aiden Smith
+2018
+
+3
+1415
+202314004
+Ella Martin
+2021
+
+3
+1415
+202314005
+Mason Harris
+2022
+
+3
+5516
+202355001
+Ethan Wilson
+2019
+
+3
+5516
+202355002
+Sophia Davis
+2020
+
+3
+5516
+202355003
+Ava Smith
+2018
+
+3
+5516
+202355004
+Liam Jackson
+2021
+
+3
+5516
+202355005
+Olivia Turner
+2022
+
+3
+1917
+202319001
+Mason Harris
+2018
+
+3
+1917
+202319002
+Sophia Turner
+2019
+
+3
+1917
+202319003
+Ella Davis
+2020
+
+3
+1917
+202319004
+Liam Wilson
+2021
+
+3
+1917
+202319005
+Ava Smith
+2022
+
+3
+4718
+202347001
+Noah Davis
+2019
+
+3
+4718
+202347002
+Sophia Turner
+2020
+
+3
+4718
+202347003
+Aiden Smith
+2018
+
+3
+4718
+202347004
+Ella Martin
+2021
+
+3
+4718
+202347005
+Mason Harris
+2022

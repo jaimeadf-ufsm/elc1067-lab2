@@ -1,0 +1,1 @@
+./build.sh && cat ./input.txt - | stdbuf -o0 -i0 ./t5.o

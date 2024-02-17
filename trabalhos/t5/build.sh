@@ -1,0 +1,1 @@
+gcc -Wall -g main.c menu.c cursos.c alunos.c universidade.c -o t5.o
